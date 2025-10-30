@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Accessible Keyboard Reorder</title>
+    <style>
+      body {
+        font-family: system-ui, Arial;
+        padding: 20px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        max-width: 420px;
+      }
+      li {
+        padding: 10px 12px;
+        margin: 6px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li:focus {
+        outline: 3px solid #2563eb;
+      }
+      .grabbed {
+        background: #fffbe6;
+        border-color: #f59e0b;
+      }
+      .sr-only {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .controls {
+        gap: 8px;
+        display: flex;
+      }
+      button.icon {
+        padding: 6px 8px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Reorder items (keyboard accessible)</h1>
+    <p>
+      Use <strong>Space</strong> to pick up or drop,
+      <strong>Arrow Up/Down</strong> to move while picked up,
+      <strong>Esc</strong> to cancel.
+    </p>
+
+    <div role="region" aria-label="Reorder list example">
+      <ul id="reorderList" role="list" aria-label="Priority items">
+        <li tabindex="0" role="option" aria-grabbed="false">
+          Task A
+          <span class="controls"
+            ><button class="icon" aria-label="Move up">▲</button
+            ><button class="icon" aria-label="Move down">▼</button></span
+          >
+        </li>
+        <li tabindex="0" role="option" aria-grabbed="false">
+          Task B
+          <span class="controls"
+            ><button class="icon" aria-label="Move up">▲</button
+            ><button class="icon" aria-label="Move down">▼</button></span
+          >
+        </li>
+        <li tabindex="0" role="option" aria-grabbed="false">
+          Task C
+          <span class="controls"
+            ><button class="icon" aria-label="Move up">▲</button
+            ><button class="icon" aria-label="Move down">▼</button></span
+          >
+        </li>
+        <li tabindex="0" role="option" aria-grabbed="false">
+          Task D
+          <span class="controls"
+            ><button class="icon" aria-label="Move up">▲</button
+            ><button class="icon" aria-label="Move down">▼</button></span
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div id="live" aria-live="polite" class="sr-only"></div>
+
+    <script>
+      (function () {
+        const list = document.getElementById("reorderList");
+        const live = document.getElementById("live");
+        let grabbedIndex = -1;
+        let elements;
+
+        function refreshElems() {
+          elements = Array.from(list.querySelectorAll("li"));
+          elements.forEach((el, idx) => {
+            el.setAttribute("data-index", idx);
+            // set position hint for screen reader
+            el.setAttribute(
+              "aria-label",
+              `${el.textContent.trim()}, ${idx + 1} of ${elements.length}`
+            );
+          });
+        }
+
+        function announce(text) {
+          live.textContent = text;
+        }
+
+        function grabItem(idx) {
+          if (grabbedIndex !== -1) return;
+          grabbedIndex = idx;
+          const el = elements[grabbedIndex];
+          el.classList.add("grabbed");
+          el.setAttribute("aria-grabbed", "true");
+          el.focus();
+          announce(
+            `${el.textContent.trim()} picked up. Use arrow keys to move, press space or enter to drop, escape to cancel.`
+          );
+        }
+
+        function dropItem() {
+          if (grabbedIndex === -1) return;
+          const el = elements[grabbedIndex];
+          el.classList.remove("grabbed");
+          el.setAttribute("aria-grabbed", "false");
+          announce(
+            `${el.textContent.trim()} dropped at position ${grabbedIndex + 1}.`
+          );
+          grabbedIndex = -1;
+          refreshElems();
+        }
+
+        function cancelGrab() {
+          if (grabbedIndex === -1) return;
+          const el = elements[grabbedIndex];
+          el.classList.remove("grabbed");
+          el.setAttribute("aria-grabbed", "false");
+          announce(`Move cancelled for ${el.textContent.trim()}.`);
+          grabbedIndex = -1;
+          refreshElems();
+          el.focus();
+        }
+
+        function moveGrabbed(delta) {
+          if (grabbedIndex === -1) return;
+          const newIndex = grabbedIndex + delta;
+          if (newIndex < 0 || newIndex >= elements.length) {
+            announce("Cannot move further.");
+            return;
+          }
+          const item = elements[grabbedIndex];
+          const reference =
+            delta > 0 ? elements[newIndex].nextSibling : elements[newIndex];
+          list.insertBefore(item, reference);
+          // update internal list and keep grabbedIndex at new location
+          grabbedIndex = newIndex;
+          refreshElems();
+          // restore focus to moved item
+          elements[grabbedIndex].focus();
+          announce(
+            `${item.textContent.trim()} moved to position ${grabbedIndex + 1}.`
+          );
+        }
+
+        // handle keyboard on list items
+        list.addEventListener("keydown", (e) => {
+          const target = e.target.closest("li");
+          if (!target) return;
+          refreshElems();
+          const idx = parseInt(target.getAttribute("data-index"), 10);
+          const key = e.key;
+
+          if (key === " " || key === "Spacebar" || key === "Enter") {
+            e.preventDefault();
+            if (grabbedIndex === -1) {
+              grabItem(idx);
+            } else if (grabbedIndex === idx) {
+              dropItem();
+            } else {
+              // If another item had been grabbed, move focus to this item
+              elements[idx].focus();
+            }
+            return;
+          }
+
+          if (key === "Escape") {
+            e.preventDefault();
+            cancelGrab();
+            return;
+          }
+
+          if (key === "ArrowUp") {
+            e.preventDefault();
+            if (grabbedIndex === -1) {
+              // normal keyboard navigation: move focus to previous
+              const prev = elements[Math.max(0, idx - 1)];
+              prev && prev.focus();
+            } else {
+              moveGrabbed(-1);
+            }
+            return;
+          }
+
+          if (key === "ArrowDown") {
+            e.preventDefault();
+            if (grabbedIndex === -1) {
+              const next = elements[Math.min(elements.length - 1, idx + 1)];
+              next && next.focus();
+            } else {
+              moveGrabbed(1);
+            }
+            return;
+          }
+        });
+
+        // Buttons for mouse users (or keyboard users who prefer buttons)
+        list.addEventListener("click", (e) => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          const li = btn.closest("li");
+          refreshElems();
+          const idx = parseInt(li.getAttribute("data-index"), 10);
+          if (btn.getAttribute("aria-label") === "Move up") {
+            if (idx > 0) {
+              list.insertBefore(elements[idx], elements[idx - 1]);
+              refreshElems();
+              elements[idx - 1].focus();
+              announce(
+                `${elements[
+                  idx - 1
+                ].textContent.trim()} moved to position ${idx}.`
+              );
+            }
+          } else if (btn.getAttribute("aria-label") === "Move down") {
+            if (idx < elements.length - 1) {
+              list.insertBefore(elements[idx + 1], elements[idx]);
+              refreshElems();
+              elements[idx + 1].focus();
+              announce(
+                `${elements[idx + 1].textContent.trim()} moved to position ${
+                  idx + 2
+                }.`
+              );
+            }
+          }
+        });
+
+        // initialize
+        refreshElems();
+      })();
+    </script>
+  </body>
+</html>
