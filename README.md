@@ -1,1 +1,1 @@
-A curated guide for developing scalable, maintainable, and high-performance React applications. This repository consolidates best practices, coding standards, and optimization strategies for React developers, from project setup to advanced performance tuning.
+A collection of industry-proven best practices and guidelines to help create robust and efficient applications.
