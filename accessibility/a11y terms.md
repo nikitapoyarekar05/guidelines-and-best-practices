@@ -44,8 +44,8 @@ Five categories: Visual, Motor, Hearing, Cognitive, Speech
     | **Example**            | `<article>`, `<button>`                 | `<main>`, `<nav>`, `<header>`                             |
 
 - All landmark elements are semantic, but not all semantic elements are landmarks
-    - Landmarks like ```<header>, <nav>, <main>, <aside>, <footer>``` describe both structure and meaning of the page. By definition, that makes them semantic elements. They tell the browser and assistive tech what that section represents.
-    - Many elements are semantic, but they don’t define a navigational or structural region for assistive technologies. These include elements like   ```<article>, <section> (without aria-label) <figure>, <blockquote>, <p>, <h1>–<h6>, <strong>, <em>``` etc. These are semantic because they describe the purpose of their content but screen readers don’t treat them as landmarks you can jump to. 
+    - Landmarks like `<header>, <nav>, <main>, <aside>, <footer>` describe both structure and meaning of the page. By definition, that makes them semantic elements. They tell the browser and assistive tech what that section represents.
+    - Many elements are semantic, but they don’t define a navigational or structural region for assistive technologies. These include elements like   `<article>, <section> (without aria-label) <figure>, <blockquote>, <p>, <h1>–<h6>, <strong>, <em>` etc. These are semantic because they describe the purpose of their content but screen readers don’t treat them as landmarks you can jump to. 
 
 So, landmarks form a subset of semantic elements, specifically those that define major regions of a page layout.
 
