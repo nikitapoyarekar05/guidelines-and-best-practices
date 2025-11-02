@@ -28,7 +28,7 @@ All actions are announced via ARIA live region, ensuring screen readers describe
 ## Live Region
 Screen readers automatically announce updates to the following element
 
-```<div id="live" aria-live="polite" class="sr-only"></div>```
+`<div id="live" aria-live="polite" class="sr-only"></div>`
 
 Used to communicate status: e.g., “Task A picked up”, “moved to position 2”, etc.
 
