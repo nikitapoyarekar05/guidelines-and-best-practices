@@ -1,0 +1,74 @@
+<head>
+  <script src="index.js"></script>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+  <main>
+    <header>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Coffee_beans_by_gnokii.svg/640px-Coffee_beans_by_gnokii.svg.png"
+      />
+      <div>
+        <h1>ACME Coffee Shop</h1>
+        <h2 class="subheader">"Cafeína para la comunidad."</h3>
+      </div>
+    </header>
+
+    <h2>Order Online</h2>
+
+    <blockquote>Online orders still need to be picked up in store, but allow you to skip the line! <br/><br/>
+
+      <a class="learnmore" href='#'>Learn more!</a>
+    </blockquote>
+
+    <form>
+
+    <div class="formTitle">Drinks</div>
+
+    <label for="drip">Americano:</label>
+    <input type="number" id="drip" 
+       min="0" max="10">
+
+       <br />
+
+    <label for="iced">Iced Americano:</label>
+    <input type="number" id="iced" 
+       min="0" max="10">
+
+       <br />
+
+    <label for="cappuccino">Cappuccino:</label>
+    <input type="number" id="cappuccino" 
+      min="0" max="10">
+
+      <br />
+
+    <label for="latte">Latte:</label>
+    <input type="number" id="latte"
+      min="0" max="10">
+
+      <br />
+
+    <label for="mocha">Mocha:</label>
+    <input type="number" id="mocha" 
+      min="0" max="10">
+
+
+    <div class="formTitle">Pickup Information</div>
+
+      <p>Name:</p>
+      <input
+        id="name"
+        name="name"
+        required
+        oninvalid="this.setCustomValidity(' ')"
+      />
+      <br />
+      <div class="button" onclick="document.getElementById('orderConfirmation').classList.remove('hidden')">Place Order</div>
+    </form>
+
+    <p aria-live="assertive" id="orderConfirmation" class="hidden">Order confirmed! Your drink(s) will be ready in 10-15 minutes.</p>
+
+  </main>
+</body>

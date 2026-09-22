@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ACME Coffee Shop – How We Source Our Beans</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+   <div class="header">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Coffee_beans_by_gnokii.svg/640px-Coffee_beans_by_gnokii.svg.png"
+      />
+      <div>
+        <h1>ACME Coffee Shop</h1>
+        <h2 class="subheader">"Cafeína para la comunidad."</h3>
+      </div>
+    </div>
+
+    <h2>How We Source Our Beans</h2>
+
+    <div class="flex">
+      <div>
+        <p tabindex="0">We partner with incredible providers from all over the world.</p>
+        <a href="X">Meet our Farmers</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80"/>
+      <div> 
+        <p tabindex="0">We roast our beans with care, right here in town.</p>
+      <a href="X">Our Headquarters</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"/> 
+      <div>
+        <p tabindex="0">Did you know we offer tours and tastings?</p>
+      <div class="button">Sign up for a tour</div>
+      </div>
+
+      <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2369&q=80"/> 
+    </div> 
+
+
+    <div id="modalWrapper" class="modalWrapper hidden">
+    <div id="modal" class="modal">
+      <p onClick="document.getElementById('modalWrapper').classList.add('hidden');" class="closeModal">X</p>
+      <h2>Special Promotion!</h2>
+      <p><b>Buy two drinks, get a third for free!</b> Perfect for treating the team to an afternoon coffee. </p>
+      <button id="orderButton">Order Now!</button>
+    </div>
+    </div>
+
+  <script src=./index.js"></script>
+</body>
+
+</html>

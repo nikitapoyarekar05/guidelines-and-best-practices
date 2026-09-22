@@ -1,0 +1,90 @@
+<html lang="en">
+  <head>
+    <title>ACME Coffee Shop</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Coffee_beans_by_gnokii.svg/640px-Coffee_beans_by_gnokii.svg.png"
+        />
+        <div>
+          <h1>ACME Coffee Shop</h1>
+          <h3>"Cafeína para la comunidad."</h3>
+        </div>
+      </header>
+
+      <div class="flex">
+        <section class="about">
+          <img
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+            alt="Three lattes with heart foam art, sitting on a wooden table, surrounded by plants in white pots."
+          />
+          <img
+            src="https://images.unsplash.com/photo-1522992319-0365e5f11656?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+          />
+          <div>
+            <h1>About us</h1>
+            <p>
+              We opened our first shop in 1995. Since then we've expanded to 5
+              shops around the metro area, partnered with excellent local
+              bakers, and extended our hours – all so we can offer you the
+              highest quality, most delicious coffee available. We're proud to
+              be a part of the community and excited for what's next! Follow us
+              on social media to see all the latest news, seasonal drinks, and
+              events.
+            </p>
+            <h4>Hours</h4>
+            <p><b>Mon - Fri:</b> 6AM - 4PM<br /><b>Sat - Sun:</b> 8AM - 6PM</p>
+          </div>
+        </section>
+
+        <section class="email">
+          <h2>Sign up for our mailing list</h2>
+          <p>Get all the latest updates directly in your inbox!</p>
+          <form>
+            <label for="name">Name:</label>
+            <input
+              id="name"
+              name="name"
+              required
+              oninvalid="this.setCustomValidity(' ')"
+            />
+            <br />
+            <label for="email">Email:</label>
+            <input
+              id="email"
+              name="email"
+              required
+              oninvalid="this.setCustomValidity(' ')"
+            />
+            <br />
+            <button>Submit</button>
+          </form>
+        </section>
+      </div>
+
+      <footer>
+        <p>Find us online:</p>
+        <a href="X"
+          ><img
+            class="social"
+            src="https://cdn-icons-png.flaticon.com/512/733/733635.png"
+        /></a>
+        <a href="X"
+          ><img
+            class="social"
+            src="https://cdn-icons-png.flaticon.com/512/59/59439.png"
+        /></a>
+        <a href="X"
+          ><img
+            class="social"
+            src="https://cdn-icons-png.flaticon.com/512/1384/1384089.png"
+        /></a>
+      </footer>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>

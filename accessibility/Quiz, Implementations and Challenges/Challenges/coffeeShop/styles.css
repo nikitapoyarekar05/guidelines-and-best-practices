@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Amatic SC", cursive;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  background-color: #693f3d;
+  width: 100%;
+}
+
+main {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section,
+header {
+  padding: 10px;
+}
+
+section {
+  width: 60%;
+  text-align: left;
+}
+
+header {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  color: #471a17;
+  justify-content: center;
+}
+
+header h1 {
+  font-size: 55px;
+}
+
+header img {
+  width: 100px;
+}
+
+.social {
+  width: 15px;
+}
+
+.about {
+  display: flex;
+}
+
+.about div {
+  padding-left: 10px;
+  width: 300px;
+}
+
+p {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.about img {
+  width: 200px;
+}
+
+h3 {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+}
+
+h4 {
+  margin: 0;
+  padding-top: 10px;
+  font-size: 25px;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+form > * {
+  margin: 5px;
+}
+
+input:invalid {
+  border: 2px solid red;
+}
+
+button {
+  background-color: lightblue;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 3px;
+}
