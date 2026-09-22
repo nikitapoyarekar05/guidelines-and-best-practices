@@ -1,6 +1,6 @@
 ## ENUMS
 
-- used when you have well decided set of options
+- Used when you have well decided set of options
 
 ```
 enum SeatChoice {
@@ -18,7 +18,7 @@ console.log(myMiddleSeat);
 console.log(myWindowSeat);
 ```
 
-- use this when you upfront know all options
+- Use this when you upfront know all options
 
 - By default, the first choice is always 0, but you can confugure it by your own choice. Just remember that subsequent option value will be incremented by 1
   ex. SeatChoice.AISLE = 0, but SeatChoice.MIDDLE = 17 (we set that), and SeatChoice.WINDOW = 18 (incremented by 1 as it follows SeatChoice.MIDDLE)
